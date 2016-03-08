@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  get 'student/index'
+
+  get 'teacher/index'
+
   get 'authenticate/login'
+  get 'login' => 'authenticate#login'
+  post 'authenticate/login'
 
   get 'authenticate/logout'
 
