@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160308212740) do
 
   create_table "parents", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "student_id"
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "created_at", null: false
@@ -47,7 +48,6 @@ ActiveRecord::Schema.define(version: 20160308212740) do
   create_table "students", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "teacher_id"
-    t.integer  "parent_id"
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "created_at", null: false

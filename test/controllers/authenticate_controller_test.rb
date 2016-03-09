@@ -7,7 +7,7 @@ class AuthenticateControllerTest < ActionController::TestCase
   end
 
   test "should get logout" do
-    get :delete
+    delete :destroy
     assert_redirected_to login_path
   end
 

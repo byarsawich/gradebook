@@ -22,8 +22,8 @@ class UserTest < ActiveSupport::TestCase
     assert_equal Rails.application.routes.url_helpers.student_index_path, u2.get_home_dashboard
   end
 
-  test "user create teacher" do
-    u = User.create_teacher(email: "a@a.com", password: "monkey", first_name: "Alex", last_name: "Anzio")
+  test "user create new user" do
+    u = User.create_user(email: "a@a.com", password: "monkey", type: "Teacher", user_params: { first_name: "Alex", last_name: "Anzio"})
     t = Teacher.find_by(user_id: u.id)
     assert_equal 1, u.get_role
     assert_equal "Alex", u.teacher.first_name

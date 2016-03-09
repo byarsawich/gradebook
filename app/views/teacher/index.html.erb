@@ -21,11 +21,15 @@
           <td><%= user.teacher.first_name %></td>
           <td><%= user.teacher.last_name %></td>
           <td><%= link_to "Edit", edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= link_to "New Teacher", new_user_path("Teacher") %>
+
 
 <h4>Students</h4>
 <div class="wrapper">
@@ -46,6 +50,7 @@
           <td><%= user.student.first_name %></td>
           <td><%= user.student.last_name %></td>
           <td><%= link_to "Edit", edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -71,6 +76,7 @@
           <td><%= user.parent.first_name %></td>
           <td><%= user.parent.last_name %></td>
           <td><%= link_to "Edit", edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -104,4 +110,4 @@
 </div>
 <br>
 
-<%= link_to 'New Grade', new_grade_path %>
+<p><%= link_to "Logout", login_path, method: :delete %></p>

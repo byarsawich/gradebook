@@ -18,33 +18,16 @@ class User < ActiveRecord::Base
     role.role == 1 ? Rails.application.routes.url_helpers.teacher_index_path : Rails.application.routes.url_helpers.student_index_path
   end
 
-  def self.create_teacher(email: nil, password: nil, first_name: nil, last_name: nil)
-    t = Teacher.create(first_name: first_name, last_name: last_name)
-    u = User.create(email: email, password: password, role_id: Role.find_by(name: "Teacher").id )
-    u.teacher = t
-    t.save
+  def self.create_user(email: nil, password: nil, type: nil, user_params: nil)
+    userclass = type.constantize
+    userclass.connection
+    newuser = userclass.create(user_params)
+    u = User.create(email: email, password: password, role_id: Role.find_by(name: type).id)
+    newuser.user = u
+    newuser.save
     u.save
     u
   end
-
-  def self.create_student(email: nil, password: nil, first_name: nil, last_name: nil, teacher_id: nil, parent_id: nil)
-    s = Student.create(first_name: first_name, last_name: last_name, teacher_id: teacher_id, parent_id: parent_id)
-    u = User.create(email: email, password: password, role_id: Role.find_by(name: "Student").id )
-    u.student = s
-    s.save
-    u.save
-    u
-  end
-
-  def self.create_parent(email: nil, password: nil, first_name: nil, last_name: nil)
-    p = Parent.create(first_name: first_name, last_name: last_name)
-    u = User.create(email: email, password: password, role_id: Role.find_by(name: "Parent").id )
-    u.parent = p
-    p.save
-    u.save
-    u
-  end
-
 
   def self.with_group(group)
     joins(group)
