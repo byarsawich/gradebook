@@ -33,23 +33,23 @@ class UsersController < ApplicationController
   def create
     @user = User.create_user(email: user_params[:email],
           password: user_params[:password],
-          type: Role.find(user_params[:role_id].to_i).name,
+          type: params[:type],
           user_hash: user_params[params[:type].downcase])
 
     if @user.save
-      format.html { redirect_to teacher_index_path, notice: 'User was successfully created.' }
+      redirect_to teacher_index_path, notice: 'User was successfully created.'
     else
-      format.html { render :new }
+      render :new
     end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if @user.update(user_params)
-      format.html { redirect_to teacher_index_path, notice: 'User was successfully updated.' }
+    if @user.update_user?(email: user_params[:email], user_hash: user_params[params[:type].downcase])
+      redirect_to teacher_index_path, notice: 'User was successfully updated.'
     else
-      format.html { render :edit }
+      render :edit
     end
   end
 

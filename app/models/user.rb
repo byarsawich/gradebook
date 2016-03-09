@@ -29,6 +29,17 @@ class User < ActiveRecord::Base
     u
   end
 
+  def update_user?(email: nil, user_hash: nil)
+    if teacher
+      success = teacher.update(user_hash)
+    elsif student
+      success = student.update(user_hash)
+    elsif parent
+      success = parent.update(user_hash)
+    end
+    update(email: email) if success
+  end
+
   def self.with_group(group)
     joins(group)
   end
