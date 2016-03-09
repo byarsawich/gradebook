@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   has_secure_password
   belongs_to :role
-  has_one :teacher
-  has_one :student
-  has_one :parent
+  has_one :teacher, dependent: :destroy
+  has_one :student, dependent: :destroy
+  has_one :parent, dependent: :destroy
 
   def role_name
     role && role.name
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
     update(email: email) if success
   end
 
-  def self.with_group(group)
-    joins(group)
+  def self.with_group(group: nil, clause: nil)
+    joins(group).where(clause)
   end
 end

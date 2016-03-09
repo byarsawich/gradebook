@@ -20,7 +20,7 @@
   <% unless @user.password_digest %>
     <div class="field">
       <%= f.label :password %><br>
-      <%= f.text_field :password %>
+      <%= f.password_field :password %>
     </div>
   <% end %>
   <%= f.fields_for @group do |e| %>
@@ -32,13 +32,13 @@
       <%= e.label :last_name %><br>
       <%= e.text_field :last_name %>
     </div>
-    <% if e.respond_to?(:teacher_id) %>
+    <% if @group.respond_to?(:teacher_id) %>
       <div class="field">
         <%= e.label :teacher_id, text: "Teacher" %><br>
         <%= e.collection_select(:teacher_id, Teacher.all, :id, :name) %>
       </div>
     <% end %>
-    <% if e.respond_to?(:student_id) %>
+    <% if @group.respond_to?(:student_id) %>
       <div class="field">
         <%= e.label :student_id, text: "Student" %><br>
         <%= e.collection_select(:teacher_id, Student.all, :id, :name) %>

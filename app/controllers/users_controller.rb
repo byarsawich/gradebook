@@ -55,18 +55,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if @user.teacher
-      @user.teacher.destroy
-    elsif @user.student
-      @user.student.destroy
-    elsif @user.parent
-      @user.parent.destroy
-    end
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to teacher_index_path, notice: 'User was successfully destroyed.'
   end
 
   private
