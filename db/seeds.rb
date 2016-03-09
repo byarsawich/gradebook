@@ -11,5 +11,5 @@ teacher = Role.create(name: "Teacher", role: 1)
 student = Role.create(name: "Student", role: 2)
 parent = Role.create(name: "Parent", role: 3)
 
-teacher.users << User.new(email: "shout@devil.com", password: "kickstart")
+teacher.users << User.create_teacher(email: "shout@devil.com", password: "kickstart", first_name: "John", last_name: "Doe")
 student.users << User.new(email: "punk@dead.com", password: "monkey")
