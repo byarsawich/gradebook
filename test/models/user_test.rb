@@ -23,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user create new user" do
-    u = User.create_user(email: "a@a.com", password: "monkey", type: "Teacher", user_params: { first_name: "Alex", last_name: "Anzio"})
+    u = User.create_user(email: "a@a.com", password: "monkey", type: "Teacher", user_hash: { first_name: "Alex", last_name: "Anzio"})
     t = Teacher.find_by(user_id: u.id)
     assert_equal 1, u.get_role
     assert_equal "Alex", u.teacher.first_name

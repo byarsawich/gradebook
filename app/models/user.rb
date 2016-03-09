@@ -18,10 +18,10 @@ class User < ActiveRecord::Base
     role.role == 1 ? Rails.application.routes.url_helpers.teacher_index_path : Rails.application.routes.url_helpers.student_index_path
   end
 
-  def self.create_user(email: nil, password: nil, type: nil, user_params: nil)
+  def self.create_user(email: nil, password: nil, type: nil, user_hash: nil)
     userclass = type.constantize
     userclass.connection
-    newuser = userclass.create(user_params)
+    newuser = userclass.create(user_hash)
     u = User.create(email: email, password: password, role_id: Role.find_by(name: type).id)
     newuser.user = u
     newuser.save

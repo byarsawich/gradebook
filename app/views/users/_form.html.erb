@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,18 +11,40 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag :type, @type %>
+  <%= f.hidden_field :role_id %>
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :password_digest %><br>
-    <%= f.text_field :password_digest %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br>
-    <%= f.number_field :role %>
-  </div>
+  <% unless @user.password_digest %>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.text_field :password %>
+    </div>
+  <% end %>
+  <%= f.fields_for @group do |e| %>
+    <div class="field">
+      <%= e.label :first_name %><br>
+      <%= e.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= e.label :last_name %><br>
+      <%= e.text_field :last_name %>
+    </div>
+    <% if e.respond_to?(:teacher_id) %>
+      <div class="field">
+        <%= e.label :teacher_id, text: "Teacher" %><br>
+        <%= e.collection_select(:teacher_id, Teacher.all, :id, :name) %>
+      </div>
+    <% end %>
+    <% if e.respond_to?(:student_id) %>
+      <div class="field">
+        <%= e.label :student_id, text: "Student" %><br>
+        <%= e.collection_select(:teacher_id, Student.all, :id, :name) %>
+      </div>
+    <% end %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
