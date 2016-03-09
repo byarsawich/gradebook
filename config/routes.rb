@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
+  root 'teacher#index'
   get 'student/index'
-
   get 'teacher/index'
 
   get 'authenticate/login'
-  get 'login' => 'authenticate#login'
-  post 'authenticate/login'
-
-  get 'authenticate/logout'
+  get 'login' => 'authenticate#new'
+  post 'login' => 'authenticate#create'
+  delete 'login' => 'authenticate#destroy'
 
   resources :grades
   resources :assignments

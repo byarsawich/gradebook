@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_one :teacher
   has_one :student
-  has_one :parents
+  has_one :parent
 
   def role_name
     role && role.name
@@ -46,15 +46,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.with_teachers
-    joins(:teacher)
-  end
-
-  def self.with_students
-    joins(:students)
-  end
-
-  def self.with_parents
-    joins(:parents)
+  def self.with_group(group)
+    joins(group)
   end
 end

@@ -4,8 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private def authenticate
-    unless session[:user_id]
-      redirect_to authenticate_login_path, notice: "Please Login First"
-    end
+    redirect_to login_path, notice: "Please Login First" unless session[:user_id]
+  end
+
+  private def authorize_teacher
+    redirect_to :back, notice: "You don't have permission to access that page." unless session[:role_name] == "Teacher"
   end
 end
