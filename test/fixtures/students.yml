@@ -3,13 +3,11 @@
 one:
   user_id: 1
   teacher_id: 1
-  parent_id: 1
   first_name: MyString
   last_name: MyString
 
 two:
   user_id: 1
   teacher_id: 1
-  parent_id: 1
   first_name: MyString
   last_name: MyString

@@ -11,6 +11,6 @@ class TeacherController < ApplicationController
   end
 
   private def authorize_dashboard
-    edirect_to student_index_path, notice: "You don't have permission to access that page." unless session[:role_name] == "Teacher"
+    redirect_to student_index_path, notice: "You don't have permission to access that page." unless session[:role_name] == "Teacher"
   end
 end

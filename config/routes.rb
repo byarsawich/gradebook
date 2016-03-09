@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   get 'student/index'
   get 'teacher/index'
 
-  get 'authenticate/login'
+  get 'authenticate/new'
   get 'login' => 'authenticate#new'
   post 'login' => 'authenticate#create'
   delete 'login' => 'authenticate#destroy'
+  get 'login/edit' => 'authenticate#edit', as: :edit_login
+  patch 'login' => 'authenticate#update'
+  put 'login' => 'authenticate#update'
 
   resources :grades
   resources :assignments

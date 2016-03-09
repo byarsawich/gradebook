@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<h1>Log on to Awesome Grades</h1>
+<%= form_tag login_path, method: "PATCH" do %>
+  <%= form_for :form_fields do |ff| %>
+    <p><%= ff.email_field :email, {value: @user.email, readonly: true }%></p>
+    <p><%= ff.password_field :password, placeholder: "Old Password" %></p>
+    <p><%= ff.password_field :new_password, placeholder: "New Password" %></p>
+    <%= submit_tag "Login" %>
+  <% end %>
+<% end %>
