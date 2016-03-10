@@ -51,6 +51,8 @@
           <td><%= user.student.last_name %></td>
           <td><%= link_to "Edit", edit_user_path(user, type: "Student") %></td>
           <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'View Grades', grades_path(student_id: user.student.id) %></td>
+          <td><%= link_to 'Add Grade', new_grade_path(student_id: user.student.id) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -114,3 +116,4 @@
 </div>
 <br>
 <p><%= link_to "New Assignment", new_assignment_path %></p>
+<td><%= link_to 'Add Grade', new_grade_path %></td>

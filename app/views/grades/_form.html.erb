@@ -11,13 +11,14 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :student_id %>
   <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.number_field :student_id %>
+    <%= f.label :student_name %><br>
+    <%= f.text_field :student_name, readonly: true %>
   </div>
   <div class="field">
-    <%= f.label :assignment_id %><br>
-    <%= f.number_field :assignment_id %>
+    <%= f.label :assignment_id, text: "Assignment" %><br>
+    <%= f.collection_select(:assignment_id, @assignments, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :grade %><br>

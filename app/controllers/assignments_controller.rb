@@ -3,11 +3,6 @@ class AssignmentsController < ApplicationController
   before_action :authorize_teacher
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
 
-  # GET /assignments
-  # GET /assignments.json
-  def index
-    @assignments = Assignment.all
-  end
 
   # GET /assignments/1
   # GET /assignments/1.json
@@ -17,7 +12,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new
+    @assignment = Assignment.new(teacher_id: Teacher.find_by(user_id: session[:user_id]).id)
   end
 
   # GET /assignments/1/edit
@@ -29,28 +24,20 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(assignment_params)
 
-    respond_to do |format|
-      if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
-        format.json { render :show, status: :created, location: @assignment }
-      else
-        format.html { render :new }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
+    if @assignment.save
+      redirect_to @teacher_index_path, notice: 'Assignment was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /assignments/1
   # PATCH/PUT /assignments/1.json
   def update
-    respond_to do |format|
-      if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assignment }
-      else
-        format.html { render :edit }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
+    if @assignment.update(assignment_params)
+      redirect_to teacher_index_path, notice: 'Assignment was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,10 +45,7 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1.json
   def destroy
     @assignment.destroy
-    respond_to do |format|
-      format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to teacher_index_path, notice: 'Assignment was successfully destroyed.'
   end
 
   private
