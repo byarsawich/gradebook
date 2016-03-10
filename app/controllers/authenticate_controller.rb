@@ -13,7 +13,7 @@ class AuthenticateController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       session[:role_name] = user.role_name
-      redirect_to user.get_home_dashboard, notice: "Login Great Success"
+      redirect_to root_path, notice: "Login Great Success"
     else
       flash.now[:alert] = "Incorrect login information.  Please try again"
       render :new
