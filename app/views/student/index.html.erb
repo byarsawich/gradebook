@@ -1,2 +1,26 @@
-<h1>Student#index</h1>
-<p>Find me in app/views/student/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome Students</h1>
+
+<h4>Grades for <%= @student.name %></h4>
+<div class="wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Assignment Name</th>
+        <th>Assignment Date</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @students_grades.each do |grade| %>
+        <tr>
+          <td><%= grade.grade %></td>
+          <td><%= grade.assignment.name %></td>
+          <td><%= grade.assignment.duedate %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -12,6 +12,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+    redirect_to edit_assignment_path(@assignment)
   end
 
   # GET /assignments/new

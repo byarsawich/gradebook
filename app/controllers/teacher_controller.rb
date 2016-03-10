@@ -7,8 +7,7 @@ class TeacherController < ApplicationController
     teacher_id = Teacher.find_by(user_id: session[:user_id]).id
     @users_students = User.with_group(group: :student, clause: "teacher_id = #{teacher_id}")
     @users_parents = User.joins("JOIN parents ON users.id = parents.user_id JOIN students ON parents.student_id = students.id JOIN teachers ON students.teacher_id = #{teacher_id}").group(:email)
-    # byebug
-    @assignments = Assignment.all
+    @assignments = Assignment.where(teacher_id: Teacher.find_by(session[:user_id]).id)
   end
 
   private def authorize_dashboard

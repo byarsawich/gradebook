@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   teacher_id: 1
-  name: MyString
+  name: Quiz
   duedate: 2016-03-08
 
 two:
+  id: 2
   teacher_id: 1
-  name: MyString
+  name: Homework
   duedate: 2016-03-08
