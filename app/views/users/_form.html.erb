@@ -41,7 +41,7 @@
     <% if @group.respond_to?(:student_id) %>
       <div class="field">
         <%= e.label :student_id, text: "Student" %><br>
-        <%= e.collection_select(:teacher_id, Student.all, :id, :name) %>
+        <%= e.collection_select(:student_id, Student.all, :id, :name) %>
       </div>
     <% end %>
   <% end %>
